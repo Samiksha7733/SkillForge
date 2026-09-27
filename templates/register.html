@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Register - SkillForge{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="card card-custom p-4">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2" style="width: 50px; height: 50px; background-color: var(--primary-light); color: var(--primary);">
+                    <i class="fa-solid fa-user-plus fa-lg"></i>
+                </div>
+                <h3 class="fw-bold text-dark">Join SkillForge</h3>
+                <p class="text-muted small">Showcase your engineering projects and connect with peers</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-semibold text-secondary">Full Name *</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Alex Rivera" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold text-secondary">Email Address *</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="student@university.edu" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-semibold text-secondary">Password *</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Create a strong password" required>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-7">
+                        <label for="branch" class="form-label fw-semibold text-secondary">Branch / Department</label>
+                        <select class="form-select" id="branch" name="branch">
+                            <option value="">Select Branch</option>
+                            <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Electronics & Communication">Electronics & Communication</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Robotics & Automation">Robotics & Automation</option>
+                            <option value="Chemical Engineering">Chemical Engineering</option>
+                            <option value="Other">Other Branch</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5 mt-3 mt-md-0">
+                        <label for="year" class="form-label fw-semibold text-secondary">Year of Study</label>
+                        <select class="form-select" id="year" name="year">
+                            <option value="">Select Year</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                            <option value="Postgraduate">Postgraduate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="bio" class="form-label fw-semibold text-secondary">Bio / Short Introduction</label>
+                    <textarea class="form-control" id="bio" name="bio" rows="3" placeholder="Tell other students about your technical interests, goals, or favorite tech stacks..."></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="profile_pic" class="form-label fw-semibold text-secondary">Profile Picture (Optional)</label>
+                    <input type="file" class="form-control" id="profile_pic" name="profile_pic" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn btn-primary-custom w-100 py-2 mb-3">Register Account</button>
+            </form>
+
+            <div class="text-center mt-3 pt-3 border-top">
+                <p class="small text-muted mb-0">Already registered? <a href="{{ url_for('login') }}" class="fw-bold text-amber text-decoration-none">Log in here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

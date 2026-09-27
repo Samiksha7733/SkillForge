@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Project - SkillForge{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8 col-lg-7">
+        <div class="card card-custom p-4">
+            <h4 class="fw-bold text-dark mb-4">
+                <i class="fa-solid fa-square-plus me-2 text-warning"></i> {{ action }} Project
+            </h4>
+
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold text-secondary">Project Title *</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ project.title if project else '' }}" placeholder="e.g. Smart Irrigation System using IoT" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-semibold text-secondary">Description *</label>
+                    <textarea class="form-control" id="description" name="description" rows="5" placeholder="Describe what the project does, key features, architecture, and your role..." required>{{ project.description if project else '' }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tech_used" class="form-label fw-semibold text-secondary">Technologies & Tools Used</label>
+                    <input type="text" class="form-control" id="tech_used" name="tech_used" value="{{ project.tech_used if project else '' }}" placeholder="Comma-separated e.g. Python, Arduino, C++, Flask">
+                    <div class="form-text">Separate technologies with commas for tag display.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="github_link" class="form-label fw-semibold text-secondary">GitHub / Repository Link (Optional)</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fa-brands fa-github text-muted"></i></span>
+                        <input type="url" class="form-control" id="github_link" name="github_link" value="{{ project.github_link if project else '' }}" placeholder="https://github.com/username/repository">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="image" class="form-label fw-semibold text-secondary">Project Image / Screenshot (Optional)</label>
+                    {% if project and project.image %}
+                        <div class="mb-2">
+                            <img src="{{ url_for('static', filename='uploads/' + project.image) }}" class="rounded img-fluid" style="max-height: 150px;" alt="Current Image">
+                        </div>
+                    {% endif %}
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary-custom py-2 px-4">{{ action }} Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

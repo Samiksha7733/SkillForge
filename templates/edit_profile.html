@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile - SkillForge{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="card card-custom p-4">
+            <h4 class="fw-bold text-dark mb-4"><i class="fa-solid fa-user-gear me-2 text-warning"></i> Edit Profile Information</h4>
+
+            <form method="POST" action="{{ url_for('edit_profile') }}" enctype="multipart/form-data">
+                <div class="mb-3 text-center">
+                    {% if user.profile_pic and user.profile_pic != 'default_avatar.png' %}
+                        <img src="{{ url_for('static', filename='uploads/' + user.profile_pic) }}" class="profile-avatar mb-2" alt="{{ user.name }}">
+                    {% else %}
+                        <div class="profile-avatar bg-warning text-dark d-flex align-items-center justify-content-center fw-bold display-5 mx-auto mb-2">
+                            {{ user.name[0] | upper }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        <label for="profile_pic" class="form-label small fw-semibold text-primary cursor-pointer">Change Profile Picture</label>
+                        <input type="file" class="form-control form-control-sm" id="profile_pic" name="profile_pic" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-semibold text-secondary">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-7">
+                        <label for="branch" class="form-label fw-semibold text-secondary">Branch / Department</label>
+                        <select class="form-select" id="branch" name="branch">
+                            <option value="">Select Branch</option>
+                            {% for b in ['Computer Science & Engineering', 'Information Technology', 'Electronics & Communication', 'Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering', 'Robotics & Automation', 'Chemical Engineering', 'Other'] %}
+                                <option value="{{ b }}" {% if user.branch == b %}selected{% endif %}>{{ b }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-5 mt-3 mt-md-0">
+                        <label for="year" class="form-label fw-semibold text-secondary">Year of Study</label>
+                        <select class="form-select" id="year" name="year">
+                            <option value="">Select Year</option>
+                            {% for y in ['1st Year', '2nd Year', '3rd Year', '4th Year', 'Postgraduate'] %}
+                                <option value="{{ y }}" {% if user.year == y %}selected{% endif %}>{{ y }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="bio" class="form-label fw-semibold text-secondary">Bio / Summary</label>
+                    <textarea class="form-control" id="bio" name="bio" rows="4">{{ user.bio or '' }}</textarea>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary-custom">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
