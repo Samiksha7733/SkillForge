@@ -411,7 +411,9 @@ def seed_demo_data():
 
     db.session.add_all([p1, p2, p3])
     db.session.commit()
+# Initialize database when the application starts
+init_db()
 
 if __name__ == '__main__':
-    init_db()
     app.run(debug=True, port=5000)
+
